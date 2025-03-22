@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -21,6 +22,9 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'alamat',
+        'no_hp',
+        'role',
     ];
 
     /**
@@ -45,4 +49,14 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function pasiens(): HasMany
+    {
+        return $this->hasMany(Periksa::class, 'id_pasien');
+    }
+    public function dokters(): HasMany
+    {
+        return $this->hasMany(Periksa::class, 'id_dokter');
+    }
+
 }
