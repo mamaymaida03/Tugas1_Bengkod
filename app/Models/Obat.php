@@ -2,24 +2,18 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Obat extends Model
 {
-    use HasFactory;
-
-    protected $table = "obats";
-
     protected $fillable = [
         'nama_obat',
         'kemasan',
-        'harga'
+        'harga',
     ];
 
-    public function getHargaAttribute($value)
-    {
-        return number_format($value, 0, ',', '.');
+    public function detail_periksa(){
+        return $this->hasMany(detail_Periksa::class, 'id_obat');
     }
-
+    
 }

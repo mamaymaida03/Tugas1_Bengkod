@@ -19,12 +19,12 @@ class User extends Authenticatable
      * @var list<string>
      */
     protected $fillable = [
-        'name',
-        'email',
-        'password',
+        'nama',
         'alamat',
         'no_hp',
         'role',
+        'email',
+        'password',
     ];
 
     /**
@@ -50,13 +50,15 @@ class User extends Authenticatable
         ];
     }
 
-    public function pasiens(): HasMany
+   
+    public function periksa_pasien():HasMany
     {
-        return $this->hasMany(Periksa::class, 'id_pasien');
-    }
-    public function dokters(): HasMany
-    {
-        return $this->hasMany(Periksa::class, 'id_dokter');
+        return $this->hasMany(Periksa::class, 'id_pasien', localKey: 'id');
     }
 
+    public function periksa_dokter():HasMany
+    {
+        return $this->hasMany(Periksa::class, 'id_dokter', localKey: 'id');
+    }
+    
 }
